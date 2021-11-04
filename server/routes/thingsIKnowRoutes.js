@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const thing = await Thing.find();
-  debug(chalk.red("hola exito?"));
+
   res.json(thing);
 });
 
@@ -74,4 +74,15 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+router.put("/", async (req, res, next) => {
+  try {
+    const { _id } = req.body;
+    await Thing.findByIdAndUpdate(_id, req.body);
+    res.json(req.body);
+  } catch (error) {
+    error.code = 400;
+    error.message = "Failed request";
+    next(error);
+  }
+});
 module.exports = router;
