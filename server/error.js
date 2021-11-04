@@ -5,7 +5,7 @@ const notFoundHandler = (req, res) => {
 };
 // eslint-disable-next-line no-unused-vars
 const generalErrorHandler = (error, req, res, next) => {
-  debug("Hubo un errosito de nada UwU", error.message);
+  debug("Hubo un errosito de nada UwU: ", error.message);
   const message = error.code ? error.message : "errosito General Petation";
   res.status(error.code || 500).json({ error: message });
 };

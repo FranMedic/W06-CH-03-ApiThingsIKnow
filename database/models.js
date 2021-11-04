@@ -13,6 +13,6 @@ const thingSchema = new Schema({
   },
 });
 
-const Thing = model("Thing", thingSchema);
+const Thing = model("Thing", thingSchema, "thingsIKnow");
 
 module.exports = Thing;
