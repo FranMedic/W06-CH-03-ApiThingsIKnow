@@ -45,4 +45,33 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
+router.delete("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const searchedThing = await Thing.findByIdAndDelete(id);
+    if (searchedThing) {
+      res.json("deleted");
+    } else {
+      const error = new Error("Thing not found");
+      error.code = 404;
+      throw error;
+    }
+  } catch (error) {
+    error.code = 400;
+    next(error);
+  }
+});
+
+router.post("/", async (req, res, next) => {
+  try {
+    const thing = req.body;
+    const newThing = await Thing.create(thing);
+    res.json(newThing);
+  } catch (error) {
+    error.code = 400;
+    error.message = "fallo";
+    next(error);
+  }
+});
+
 module.exports = router;
