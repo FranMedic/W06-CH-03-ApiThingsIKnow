@@ -1,14 +1,23 @@
-const debug = require("debug")("thingsIKnow:database");
+const debug = require("debug")("thingsIKnown:database");
 
 const chalk = require("chalk");
-
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.MONGODB_DEVELOPEMENT, (error) => {
-  if (error) {
-    debug(chalk.magenta("No se pudo iniciar la base de datos halp."));
-    debug(chalk.cyan(error.message));
-    return;
-  }
-  debug(chalk.green("Conectado a la base de datoh"));
-});
+const dataBaseProduction = process.env.MONGODB_PRODUCTION;
+const dataBaseDevelopement = process.env.MONGODB_DEVELOPEMENT;
+
+const dataBase = (dataBaseParam) => {
+  mongoose.connect(dataBaseParam, (error) => {
+    if (dataBaseParam === dataBaseProduction) {
+      debug(chalk.magentaBright("Connected to Production data base"));
+    } else if (dataBaseParam === dataBaseDevelopement) {
+      debug(chalk.magentaBright("Connected to developement data base"));
+    }
+    if (error) {
+      debug(chalk.red("No se ha podido iniciar la base de datos."));
+      debug(chalk.red(error.message));
+    }
+  });
+};
+
+module.exports = dataBase;

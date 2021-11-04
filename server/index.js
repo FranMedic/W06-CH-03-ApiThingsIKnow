@@ -8,7 +8,6 @@ const thingsIKnowRoutes = require("./routes/thingsIKnowRoutes");
 const app = express();
 
 const initializeServer = (port) => {
-  console.log("patata");
   const server = app.listen(port, () => {
     debug(chalk.greenBright(`Escuchando al puerto ${port}`));
   });
