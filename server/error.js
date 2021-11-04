@@ -1,7 +1,7 @@
-const debug = require("debug")("calculator:errors");
+const debug = require("debug")("thingsIKnow:errors");
 
 const notFoundHandler = (req, res) => {
-  res.status(404).json({ error: "Endpoint not found AIUDA" });
+  res.status(404).json({ error: "Endpoint not found AIUDAXX" });
 };
 // eslint-disable-next-line no-unused-vars
 const generalErrorHandler = (error, req, res, next) => {
