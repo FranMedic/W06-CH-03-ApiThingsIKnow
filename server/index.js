@@ -3,6 +3,7 @@ const debug = require("debug")("thingsIKnow:server");
 const morgan = require("morgan");
 const chalk = require("chalk");
 const { generalErrorHandler, notFoundHandler } = require("./error");
+const thingsIKnowRoutes = require("./routes/thingsIKnowRoutes");
 
 const app = express();
 
@@ -24,11 +25,10 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use((req, res, next) => {
   debug(chalk.blueBright("llegue a una request"));
-  res.json("LLEGUE POR DIOH");
   next();
 });
 
-app.use("/thingsiknow", thingsIKnowRoutes);
+app.use("/things", thingsIKnowRoutes);
 
 app.use(notFoundHandler);
 app.use(generalErrorHandler);
