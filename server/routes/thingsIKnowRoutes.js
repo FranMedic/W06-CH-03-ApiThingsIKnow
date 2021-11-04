@@ -11,4 +11,21 @@ router.get("/", async (req, res, next) => {
   res.json(thing);
 });
 
+router.get("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const searchedThing = await Thing.findById(id);
+    if (searchedThing) {
+      res.json(searchedThing);
+    } else {
+      const error = new Error("Thing not found");
+      error.code = 404;
+      throw error;
+    }
+  } catch (error) {
+    error.code = 400;
+    next(error);
+  }
+});
+
 module.exports = router;
