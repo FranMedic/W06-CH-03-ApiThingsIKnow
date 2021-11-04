@@ -4,7 +4,7 @@ const chalk = require("chalk");
 
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.MONGODBPATATA, (error) => {
+mongoose.connect(process.env.MONGODB_DEVELOPEMENT, (error) => {
   if (error) {
     debug(chalk.magenta("No se pudo iniciar la base de datos halp."));
     debug(chalk.cyan(error.message));

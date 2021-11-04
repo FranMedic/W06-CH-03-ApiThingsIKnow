@@ -25,7 +25,10 @@ app.use(express.json());
 app.use((req, res, next) => {
   debug(chalk.blueBright("llegue a una request"));
   res.json("LLEGUE POR DIOH");
+  next();
 });
+
+app.use("/thingsiknow", thingsIKnowRoutes);
 
 app.use(notFoundHandler);
 app.use(generalErrorHandler);
